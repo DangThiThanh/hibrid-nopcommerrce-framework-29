@@ -8,5 +8,7 @@ public class Topic_01_Data_Type {
     // số thực: float - double
     // ký tự : char
     //logic: boolean 
+    public static void main(String args[]){
 
+    }
 }
