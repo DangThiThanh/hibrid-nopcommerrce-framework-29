@@ -119,6 +119,18 @@ public class Topic_12_Radio_Box {
 
 
     }
+    @Test
+    public void TC006_Custom_Radio() {
+        driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
+        By canThoRadio = By.xpath("//div[@aria-label='Cần Thơ']");
+//        By quangNamCheck By.xpath("//div[@aria-label='Cần Thơ']");
+
+        // verify radio is not selected
+        Assert.assertEquals(driver.findElement(canThoRadio).getAttribute("aria-checked"),"false");
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Cần Thơ and @aria-checked='true'] ")).isDisplayed());
+
+
+    }
     public void checkToElement(By byXpath){
         if(!driver.findElement(byXpath).isSelected()){
             driver.findElement(byXpath).click();
