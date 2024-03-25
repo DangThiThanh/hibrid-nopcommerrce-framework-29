@@ -8,14 +8,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 import java.util.Random;
+
 
 public class Lever_01_Repeat_Yourseft {
     private WebDriver driver;
     String fisrtName, lastName, day, month, year, emailAddress, companyName, password;
-
+//
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
