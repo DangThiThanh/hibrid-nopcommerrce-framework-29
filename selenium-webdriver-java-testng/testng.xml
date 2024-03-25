@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Selenium WebDriver">
+    <test verbose="2" preserve-order="true" name="Run on GG browser">
+        <classes>
+            <class name="javaTester.Topic_05_Assert">
+                <methods>
+                    <include name="verifyTestNG"/>
+                </methods>
+            </class>
+            <class name="webdriver.Demo_DropDown_Custom">
+                <methods>
+                    <include name="TC_01_"/>
+                    <include name="TC_02_"/>
+                    <include name="TC_03_"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+</suite>
