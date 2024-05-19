@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="JRebel" name="JRebel">
-      <configuration>
-        <option name="ideModuleStorage">
-          <map>
-            <entry key="com.zeroturnaround.jrebel.FormatVersion" value="7.0.0" />
-            <entry key="jrebelEnabled" value="true" />
-            <entry key="rebelXmlGenerationInvariantToken" value="PGFwcGxpY2F0aW9uIGdlbmVyYXRlZC1ieT0iaW50ZWxsaWoiPjxpZD5zZWxlbml1bS13ZWJkcml2ZXItamF2YS10ZXN0bmc8L2lkPjxjbGFzc3BhdGg+PGRpciBuYW1lPSJEOi9UaGFuaC9BdXRvbWF0aW9uX3Rlc3RpbmcvMDIgLSBTZWxlbml1bSBXZWJkcml2ZXIvc2VsZW5pdW0td2ViZHJpdmVyLWphdmEtdGVzdG5nL291dC9wcm9kdWN0aW9uL3NlbGVuaXVtLXdlYmRyaXZlci1qYXZhLXRlc3RuZyI+PC9kaXI+PC9jbGFzc3BhdGg+PC9hcHBsaWNhdGlvbj4=" />
-          </map>
-        </option>
-        <option name="version" value="5" />
-      </configuration>
-    </facet>
-  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -21,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="selenium-server-4.10.0" level="project" />
     <orderEntry type="library" name="libraries" level="project" />
+    <orderEntry type="library" name="libralies" level="project" />
   </component>
 </module>

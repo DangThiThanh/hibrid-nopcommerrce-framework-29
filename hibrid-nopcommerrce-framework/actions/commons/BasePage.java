@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.lang.model.element.Element;
 import javax.swing.*;
 import java.sql.Driver;
 import java.time.Duration;
@@ -15,8 +16,23 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
+// Hamd static có thể truy cập được trực tiếp từ phạm vi class
+
+    public static BasePage getBasePage(){
+        return  new BasePage();
+    }
     public void clickToElement(WebDriver driver) {
         driver.findElement(By.cssSelector("")).click();
+    }
+    public WebElement getElement(WebDriver driver, String localtor) {
+        return driver.findElement(By.xpath(localtor));
+    }
+
+    public List<WebElement> getListElement(WebDriver driver, String locator){
+        return driver.findElements(By.xpath(locator));
+    }
+    public By getByXPath  (String localtor) {
+        return By.xpath(localtor);
     }
 
     public String getElementText(WebDriver driver) {
@@ -105,9 +121,7 @@ public class BasePage {
         waitAlertPresence(driver).dismiss();
     }
 
-    public WebElement getElement(WebDriver driver, String localtor) {
-        return driver.findElement(By.xpath(localtor));
-    }
+
 
     public void clickToElement(WebDriver driver, String locator) {
         getElement(driver, locator).click();
@@ -121,8 +135,8 @@ public class BasePage {
         new Select(getElement(driver, locator)).selectByVisibleText(textItem);
     }
 
-    public void getSelectItemInDropdown(WebDriver driver, String locator) {
-        new Select(getElement(driver, locator)).getFirstSelectedOption().getText();
+    public String getSelectItemInDropdown(WebDriver driver, String locator) {
+       return new Select(getElement(driver, locator)).getFirstSelectedOption().getText();
     }
 
     public boolean isDropdownMultiple(WebDriver driver, String locator) {
@@ -145,11 +159,13 @@ public class BasePage {
 
     }
 
-    public String getAttributeValue(WebDriver driver, String locator, String attributeName) {
+    public String getElementAttributeValue(WebDriver driver, String locator, String attributeName) {
         return getElement(driver, locator).getAttribute(attributeName);
     }
 
-    public String getTextElement(WebDriver driver, String locator) {
+    public String getElementText(WebDriver driver, String locator) {
+        var a = getElement(driver, locator);
+        var b = a.getText();
         return getElement(driver, locator).getText();
     }
 
@@ -190,11 +206,11 @@ public class BasePage {
         }
     }
 
-    public boolean isControlDisplayed(WebDriver driver, String locator) {
+    public boolean isElementDisplayed(WebDriver driver, String locator) {
         return getElement(driver, locator).isDisplayed();
     }
 
-    public boolean isControlSelected(WebDriver driver, String locator) {
+    public boolean isElementSelected(WebDriver driver, String locator) {
         return getElement(driver, locator).isSelected();
     }
 
@@ -207,9 +223,18 @@ public class BasePage {
     public void  switchToDefaultPage(WebDriver driver, String locator) {
         driver.switchTo().defaultContent();
     }
+
+    public void clickToElementByAction(WebDriver driver, String locator) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(getElement(driver, locator)).perform();
+    }
     public void doubleClickToElement(WebDriver driver, String locator) {
         Actions actions = new Actions(driver);
-        actions.doubleClick(getElement(driver, locator)).perform();
+        actions.click(getElement(driver, locator)).perform();
+    }
+    public void releaseLeftMouse(WebDriver driver, String locator) {
+        Actions actions = new Actions(driver);
+        actions.release();
     }
 
     public void hoverMouseToElement(WebDriver driver, String locator) {
@@ -217,29 +242,84 @@ public class BasePage {
         actions.moveToElement(getElement(driver, locator)).perform();
     }
 
-    public void rightClick(WebDriver driver, String locator) {
+    public void rightClickElement(WebDriver driver, String locator) {
         Actions actions = new Actions(driver);
         actions.contextClick(getElement(driver, locator)).perform();
     }
 
-    public void dragAndDrop(WebDriver driver, String sourcelLocator, String targetLocator) {
+    public void dragAndDropElement(WebDriver driver, String sourcelLocator, String targetLocator) {
         Actions actions = new Actions(driver);
         actions.dragAndDrop((getElement(driver, sourcelLocator)), (getElement(driver, targetLocator))).perform();
     }
+
 
     public void sendKeyboardToElement(WebDriver driver, String locator, Keys kyes) {
         Actions actions = new Actions(driver);
         actions.sendKeys(getElement(driver, locator),kyes).perform();
     }
-    public void waitForElementVisible(WebDriver driver, String locator){
 
+    public void scrollToBottomPageByJS (WebDriver driver){
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
+    public void navigateToUrlByJS(WebDriver driver,String url){
+        ((JavascriptExecutor) driver).executeScript("wwindow.location= '"+ url + "'");
+    }
+    public void highLightElement(String locator, WebDriver driver){
+        WebElement element = getElement(driver,locator);
+        String originalStyle=element.getAttribute("style");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('style', arguments[1])",element,"border: 2px solid red; border-style: dashed;");
+        sleepInSeconds(2);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('style',arguments[1])",element,originalStyle);
+    }
+    public void clickToElementByJS(String locator,WebDriver driver){
+        ((JavascriptExecutor) driver).executeScript("argument[0].click();",getElement(driver,locator));
+        sleepInSeconds(2);
+    }
+    public void scrollToElementOnTopByJS(WebDriver driver,String locator){
+        ((JavascriptExecutor) driver).executeScript("argument[0].scrollInToView(true);",getElement(driver,locator));
+    }
+    public void scrollToElementOnDown(WebDriver driver,String locator){
+        ((JavascriptExecutor) driver).executeScript("argument[0].scrollInToView(false);",getElement(driver,locator));
+    }
+    public void setAttributeInDom(WebDriver driver,String locator, String attributeName, String attributeValue){
+        ((JavascriptExecutor) driver).executeScript("argument[0].setAttribute('"+ attributeName + "','" + attributeValue +"');",getElement(driver,locator));
+    }
+    public void removeAttributeInDom(WebDriver driver,String locator, String attributeRemove){
+        ((JavascriptExecutor) driver).executeScript(" return argument[0].removeAttribute('"+ attributeRemove +"');",getElement(driver,locator));
+    }
+    public  void sendKeyToElementByJS(WebDriver driver,String locator, String value){
+        ((JavascriptExecutor) driver).executeScript("argument[0].setAttribute(' value','" + value + "');",getElement(driver,locator));
+    }
+    public void getAttributeInDom(WebDriver driver,String locator, String attributeName){
+        ((JavascriptExecutor) driver).executeScript("argument[0].getAttribute('"+ attributeName + "');",getElement(driver,locator));
+    }
+    public String  getElementValidationMassage(WebDriver driver,String locator){
+         return (String) ((JavascriptExecutor) driver).executeScript(" return argument[0].validationMessage;",getElement(driver,locator));
+    }
+
+
+
+    public void waitForElementVisible(WebDriver driver, String locator){
+        new WebDriverWait(driver,Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(getByXPath(locator)));
+    }
+    public void waitForElementSelected(WebDriver driver, String locator){
+        new WebDriverWait(driver,Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeSelected(getByXPath(locator)));
+    }
+    public void waitForElementPresence(WebDriver driver, String locator){
+        new WebDriverWait(driver,Duration.ofSeconds(15)).until(ExpectedConditions.presenceOfElementLocated(getByXPath(locator)));
+    }
+    public void waitForElementInvisible(WebDriver driver, String locator){
+        new WebDriverWait(driver,Duration.ofSeconds(15)).until(ExpectedConditions.invisibilityOfElementLocated(getByXPath(locator)));
+    }
+    public void waitForElementClickable(WebDriver driver, String locator){
+        new WebDriverWait(driver,Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(getByXPath(locator)));
+    }
+
 
 
     public static void main(String[] args) {
         BasePage basePage = new BasePage();
-        System.out.println(basePage.navigationPage(new ChromeDriver(), "https://vnexpress.net/");
-
+     basePage.navigationPage(new ChromeDriver(), "https://vnexpress.net/");
     }
 
     public void sleepInSeconds(long timeInSecond) {
