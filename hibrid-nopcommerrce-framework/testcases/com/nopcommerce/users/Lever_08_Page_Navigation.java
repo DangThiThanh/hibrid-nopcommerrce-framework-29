@@ -6,17 +6,28 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.*;
+import pageObjects.nopCommerce.users.UserAddressPO;
+import pageObjects.nopCommerce.users.UserCustomerInfoPO;
+import pageObjects.nopCommerce.users.UserOrderPO;
+import pageObjects.nopCommerce.users.UserRewardPointPO;
+import pageObjects.nopCommerce.users.UserHomePO;
+import pageObjects.nopCommerce.users.UserLoginPO;
+import pageObjects.nopCommerce.PageGenerator;
+import pageObjects.nopCommerce.users.UserRegisterPO;
 
-public class Lever_06_Page_Generator extends BaseTest {
+public class Lever_08_Page_Navigation extends BaseTest {
 
-    private HomePageObject homePage;
-    private RegisterPageObject registerPage;
-    private LoginPageObject loginPage;
-    private CustomerInfoPageObject customerInfoPage;
+    private UserHomePO homePage;
+    private UserRegisterPO registerPage;
+    private UserLoginPO loginPage;
+    private UserCustomerInfoPO customerInfoPage;
     private BaseTest baseTest;
+    private UserAddressPO addressPage;
+    private UserOrderPO orderPage;
+    private UserRewardPointPO rewardPointPage;
 
     String fisrtName, lastName, day, month, year, emailAddress, companyName, password;
+
 
 
     @Parameters("browser")
@@ -24,10 +35,7 @@ public class Lever_06_Page_Generator extends BaseTest {
     public void beforeClass(String browserName) {
 
         driver= getBrowserDriver(browserName);
-
-        homePage= PageGenerator.getHomePage(driver);
-
-//        homePage = new HomePageObject(driver);
+        homePage = PageGenerator.getUserHomePage(driver);
         fisrtName = "Dua";
         lastName = "Lipa";
         day = "6";
@@ -38,11 +46,12 @@ public class Lever_06_Page_Generator extends BaseTest {
         password = "12345678@Abc";
     }
 
-
     @Test
     public void User_01_Register() {
-        homePage.clickToRegisterLink();
-        registerPage = new RegisterPageObject(driver);
+
+
+        registerPage =  homePage.openRegisterPage();
+
         registerPage.clickToMaleRadio();
         registerPage.enterToFirstNameTextBox(fisrtName);
         registerPage.enterToEmailTextBox(emailAddress);
@@ -61,15 +70,11 @@ public class Lever_06_Page_Generator extends BaseTest {
     @Test
     public void User_02_Login() {
         registerPage.clickToLogoutLink();
-        registerPage.clickToLoginLink();
-//        Từ Register page qua login page
-//        Từ page đó được sinh ra và bắt đầu làm những action của page đó
-        loginPage = new LoginPageObject(driver);
-        loginPage.enterToEmailTextBox(emailAddress);
-        loginPage.enterToPasswordTextBox(password);
-        loginPage.clickToLoginButton();
-//         Từ Login pá
-        homePage = new HomePageObject(driver);
+
+        loginPage=registerPage.openLoginPage();
+
+        homePage = loginPage.loginToSystem(emailAddress, password);
+
         Assert.assertTrue(homePage.isMyAccountLinkDisplayed());
 
     }
@@ -77,8 +82,8 @@ public class Lever_06_Page_Generator extends BaseTest {
     @Test
     public void User_03_MyAccount() {
 
-        homePage.clickToMyAccountLink();
-        customerInfoPage = new CustomerInfoPageObject(driver);
+        customerInfoPage = homePage.openCustomerInforPage();
+
         Assert.assertTrue(customerInfoPage.isGenderMaleSelected());
         Assert.assertEquals(customerInfoPage.getFirstNameTextBoxValue(), fisrtName);
         Assert.assertEquals(customerInfoPage.getValueLastNameTexBoxValue(), lastName);
@@ -87,6 +92,33 @@ public class Lever_06_Page_Generator extends BaseTest {
         Assert.assertEquals(customerInfoPage.getYearDropdownSelectedValue(), year);
         Assert.assertEquals(customerInfoPage.getMailTextBoxValue(), emailAddress);
         Assert.assertEquals(customerInfoPage.getCompanyTextBoxValue(), companyName);
+
+    }
+
+    @Test
+    public void User_04_Switch_Page(){
+//        Customer Infor --> Address
+           addressPage=customerInfoPage.openAddressPage(driver);
+//          Add new address ở bên dưới
+//        ....
+
+//        Address --> Reward point
+        rewardPointPage=addressPage.openRewardPointPage(driver);
+//        Người dùng thao tác với trang RewardPoint
+//        ....
+
+//        Reward point --> Order
+        orderPage= rewardPointPage.openOrderPage(driver);
+
+
+//        Order --> Address
+        addressPage = orderPage.openAddressPage(driver);
+
+
+//        Address --> Customer Infor
+        customerInfoPage = addressPage.openCustomerInforpage(driver);
+
+
 
     }
 

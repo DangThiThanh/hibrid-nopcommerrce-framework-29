@@ -1,38 +1,43 @@
 package com.nopcommerce.users;
 
 import commons.BaseTest;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pageObjects.nopCommerce.users.UserAddressPO;
 import pageObjects.nopCommerce.users.UserCustomerInfoPO;
+import pageObjects.nopCommerce.users.UserOrderPO;
+import pageObjects.nopCommerce.users.UserRewardPointPO;
 import pageObjects.nopCommerce.users.UserHomePO;
 import pageObjects.nopCommerce.users.UserLoginPO;
+import pageObjects.nopCommerce.PageGenerator;
 import pageObjects.nopCommerce.users.UserRegisterPO;
 
-import java.time.Duration;
+public class Lever_07_Switch_Page_Object extends BaseTest {
 
-public class Lever_03_Page_Object extends BaseTest {
-    private WebDriver driver;
     private UserHomePO homePage;
     private UserRegisterPO registerPage;
     private UserLoginPO loginPage;
     private UserCustomerInfoPO customerInfoPage;
     private BaseTest baseTest;
+    private UserAddressPO addressPage;
+    private UserOrderPO orderPage;
+    private UserRewardPointPO rewardPointPage;
+
     String fisrtName, lastName, day, month, year, emailAddress, companyName, password;
 
 
 
 
+    @Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
-        driver = new FirefoxDriver();
-        driver.get("https://demo.nopcommerce.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        homePage = new UserHomePO(driver);
-        fisrtName = "Dua ";
+    public void beforeClass(String browserName) {
+
+        driver= getBrowserDriver(browserName);
+        homePage = PageGenerator.getUserHomePage(driver);
+        fisrtName = "Dua";
         lastName = "Lipa";
         day = "6";
         month = "August";
@@ -42,12 +47,12 @@ public class Lever_03_Page_Object extends BaseTest {
         password = "12345678@Abc";
     }
 
-
-
     @Test
     public void User_01_Register() {
-        homePage.openRegisterPage();
-        registerPage = new UserRegisterPO(driver);
+
+
+        registerPage =  homePage.openRegisterPage();
+
         registerPage.clickToMaleRadio();
         registerPage.enterToFirstNameTextBox(fisrtName);
         registerPage.enterToEmailTextBox(emailAddress);
@@ -60,27 +65,26 @@ public class Lever_03_Page_Object extends BaseTest {
         registerPage.enterToConfirmPasswordTextBox(password);
         registerPage.clickToRegisterButton();
         Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
+
     }
+
     @Test
     public void User_02_Login() {
         registerPage.clickToLogoutLink();
-        registerPage.openLoginPage();
-//        Từ Register page qua login page
-//        Từ page đó được sinh ra và bắt đầu làm những action của page đó
-        loginPage = new UserLoginPO(driver);
-        loginPage.enterToEmailTextBox(emailAddress);
-        loginPage.enterToPasswordTextBox(password);
-        loginPage.clickToLoginButton();
-//         Từ Login pá
-        homePage = new UserHomePO(driver);
+
+        loginPage=registerPage.openLoginPage();
+
+        homePage = loginPage.loginToSystem(emailAddress, password);
+
         Assert.assertTrue(homePage.isMyAccountLinkDisplayed());
 
     }
+
     @Test
     public void User_03_MyAccount() {
 
-        homePage.openCustomerInforPage();
-        customerInfoPage = new UserCustomerInfoPO(driver);
+        customerInfoPage = homePage.openCustomerInforPage();
+
         Assert.assertTrue(customerInfoPage.isGenderMaleSelected());
         Assert.assertEquals(customerInfoPage.getFirstNameTextBoxValue(), fisrtName);
         Assert.assertEquals(customerInfoPage.getValueLastNameTexBoxValue(), lastName);
@@ -89,6 +93,33 @@ public class Lever_03_Page_Object extends BaseTest {
         Assert.assertEquals(customerInfoPage.getYearDropdownSelectedValue(), year);
         Assert.assertEquals(customerInfoPage.getMailTextBoxValue(), emailAddress);
         Assert.assertEquals(customerInfoPage.getCompanyTextBoxValue(), companyName);
+
+    }
+
+    @Test
+    public void User_04_Switch_Page(){
+//        Customer Infor --> Address
+           addressPage=customerInfoPage.openAddressPage(driver);
+//          Add new address ở bên dưới
+//        ....
+
+//        Address --> Reward point
+        rewardPointPage=addressPage.openRewardPointPage(driver);
+//        Người dùng thao tác với trang RewardPoint
+//        ....
+
+//        Reward point --> Order
+        orderPage= rewardPointPage.openOrderPage(driver);
+
+
+//        Order --> Address
+        addressPage = orderPage.openAddressPage(driver);
+
+
+//        Address --> Customer Infor
+        customerInfoPage = addressPage.openCustomerInforpage(driver);
+
+        addressPage =customerInfoPage.openAddressPage(driver);
 
     }
 

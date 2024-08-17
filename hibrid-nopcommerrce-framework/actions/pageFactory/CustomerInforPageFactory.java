@@ -48,7 +48,6 @@ public class CustomerInforPageFactory extends BasePage{
     public String getFirstNameTextBoxValue() {
         waitForElementVisible(driver,firstNameTextbox);
         return getElementAttributeValue(firstNameTextbox, "value");
-
     }
 
     public String getDayDropdownSelectedValue() {

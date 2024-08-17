@@ -2,7 +2,6 @@ package com.nopcommerce.users;
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -12,7 +11,6 @@ import pageFactory.CustomerInforPageFactory;
 import pageFactory.HomePageFactory;
 import pageFactory.LoginPageFactory;
 import pageFactory.RegisterPageFactory;
-import java.time.Duration;
 
 public class Lever_05_PageFactory extends BaseTest {
     private WebDriver driver;
@@ -22,6 +20,8 @@ public class Lever_05_PageFactory extends BaseTest {
     private CustomerInforPageFactory customerInfoPage;
     private BaseTest baseTest;
     String fisrtName, lastName, day, month, year, emailAddress, companyName, password;
+
+
 
     @Parameters("browser")
     @BeforeClass

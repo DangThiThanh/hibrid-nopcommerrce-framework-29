@@ -1,7 +1,7 @@
-package pageUIs;
+package pageUIs.nopCommerce.users;
 
-public class HomePageUI {
-    public static  final String  REGISTER_LINK="//a[@class='ico-register']";
+public class UserHomePageUI {
+    public static  final String  REGISTER_LINK="Xpath=//a[@class='ico-register']";
     // public: gọi hàm/ biến ra sử dụng bình thường
     // private/ default: khác package ko dùng được
     // protected: các class bên PO ko kế thừa PUI nên ko áp dụng
@@ -11,7 +11,7 @@ public class HomePageUI {
     // REGISTER_LINK: static final để quy ước 1 biến là HẰNG SỐ trong JAVA
     // Convention cho hằng số: phải viết hoa - nhiều hơn 1 từ thì phải dùng dấu _ để phân tách
 
-    public  static final String MY_ACCOUNT_LINK="//a[@class='ico-account']";
+    public  static final String MY_ACCOUNT_LINK="Xpath=//a[@class='ico-account']";
 
 
 

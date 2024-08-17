@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Nopcommerce Automation Testing">
-    <listeners>
-        <listener class-name="commons.MethodListener"></listener>
-    </listeners>
 
-    <parameter name="userUrl" value="https://demo.nopcommerce.com/" />
-    <parameter name="adminUrl" value="https://admin-demo.nopcommerce.com/"/>
+    <parameter name="url" value="https://blueimp.github.io/jQuery-File-Upload/" />
     <test name="Run on Firefox browser">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.nopcommerce.users.Lever_10_Dynamic_Locator"/>
+            <class name="jquery.cases.Lever_12_Upload"/>
         </classes>
     </test>
 <!--    <test name="Run on Chrome browser">-->
