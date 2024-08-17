@@ -1,0 +1,26 @@
+[2024-08-04 23:31:23,836 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 01: Open Register page
+[2024-08-04 23:31:24,989 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 02: Click to Male radio button
+[2024-08-04 23:31:25,331 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 03: Enter to Firstname textbox with valueDua
+[2024-08-04 23:31:25,478 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 04: Enter to Email textbox with valuedualipa8155@yopmail.com
+[2024-08-04 23:31:25,562 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 05: Enter to  LastName with valueLipa
+[2024-08-04 23:31:25,611 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 06: Enter to Day textbox with value6
+[2024-08-04 23:31:25,925 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 07: Enter to Month textbox with valueAugust
+[2024-08-04 23:31:26,232 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 08: Enter to Year textbox with value2000
+[2024-08-04 23:31:26,522 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 09: Enter to CompanyName textbox with valueMISA
+[2024-08-04 23:31:26,567 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 10: Enter to Password textbox with value12345678@Abc
+[2024-08-04 23:31:26,618 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 11: Enter to ConfirmPassword textbox with value12345678@Abc
+[2024-08-04 23:31:26,671 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 12: Click to Register button
+[2024-08-04 23:31:27,393 INFO com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 13: Verify success massage is displayed
+[2024-08-04 23:35:23,183 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 01: Open Register page
+[2024-08-04 23:35:24,296 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 02: Click to Male radio button
+[2024-08-04 23:35:24,638 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 03: Enter to Firstname textbox with value: Dua
+[2024-08-04 23:35:24,755 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 04: Enter to Email textbox with value: dualipa8147@yopmail.com
+[2024-08-04 23:35:24,820 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 05: Enter to  LastName with value: Lipa
+[2024-08-04 23:35:24,868 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 06: Enter to Day textbox with value: 6
+[2024-08-04 23:35:25,158 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 07: Enter to Month textbox with value: August
+[2024-08-04 23:35:25,442 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 08: Enter to Year textbox with value: 2000
+[2024-08-04 23:35:25,734 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 09: Enter to CompanyName textbox with value: MISA
+[2024-08-04 23:35:25,784 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 10: Enter to Password textbox with value: 12345678@Abc
+[2024-08-04 23:35:25,837 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 11: Enter to ConfirmPassword textbox with value: 12345678@Abc
+[2024-08-04 23:35:25,882 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 12: Click to Register button
+[2024-08-04 23:35:26,598 com.nopcommerce.users.Lever_14_Log4J] - User_01_Register - STEP 13: Verify success massage is displayed
